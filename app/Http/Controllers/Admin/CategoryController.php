@@ -38,6 +38,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryStoreRequest $request)
     {
+
         $image = $request->file('image')->store('public/categories');
 
         Category::create([
@@ -45,6 +46,9 @@ class CategoryController extends Controller
             'description' => $request->description,
             'image' => $image,
         ]);
+
+        $categories = Category::all();
+        return view('admin.categories.index',compact('categories'));
     }
 
     /**
